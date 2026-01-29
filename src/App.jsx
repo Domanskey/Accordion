@@ -1,4 +1,20 @@
+import { useState } from 'react'
+
 export default function App() {
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const questions = {
+    'What is roadmap.sh?': 'roadmap.sh is a community effort to create learning paths, guides, project ideas and other similar content to help developers grow in their careers.',
+    'What are the plans for roadmap.sh?': "The plans focus on keeping the existing roadmaps up-to-date with the ever-evolving tech landscape. Future goals include adding more interactive features, such as progress tracking, personalized skill assessments, and expanding the library of hands-on project ideas for various domains.",
+    'How is roadmap.sh built?': 'It is an open-source project primarily built using modern web technologies like Astro or Next.js and React. The roadmaps themselves are often rendered as interactive SVGs or organized via JSON data to ensure they are both searchable and easy to maintain by the community.',
+    'Can I use roadmap.sh in my team?': 'Yes, absolutely. Many teams use these roadmaps for onboarding new hires or structured upskilling of current employees. It serves as a standardized benchmark for the skills required for different engineering roles.',
+    'How can I create custom roadmaps?': 'You can create custom roadmaps by using the built-in editor available to registered users on the website. Alternatively, since it is open-source, you can contribute to the GitHub repository or use the available tools to draft a roadmap tailored to your specific organizational needs.',
+    'Is roadmap.sh really 7th most starred project on GitHub?': 'Yes, it consistently ranks among the top most-starred repositories globally. This massive popularity is a testament to the high-quality, community-driven content that has become a go-to resource for developers worldwide.'
+  }
+
+  const toggleAnswer = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
 
   return (
     <main className="p-7 min-w-dvw">
@@ -6,22 +22,31 @@ export default function App() {
         <h1 className="text-2xl">Frequently asked questions</h1>
         <p className="text-sm mb-3 mt-2">Here are some of the frequently asked questions</p>
       </header>
-      <ul>
-        <Accordion question={'I like cookies'} answer={"yolo"}></Accordion>
+      <ul className='flex flex-col gap-3'>
+        {Object.entries(questions).map(([question, answer]) => (
+          <Accordion
+            key={question}
+            question={question}
+            answer={answer}
+            isOpen={activeIndex === question}
+            onQuestionClick={() => { toggleAnswer(question) }}
+          />
+        ))}
       </ul>
     </main>
   )
 }
 
-function Accordion({ question, answer }) {
+function Accordion({ question, answer, onQuestionClick, isOpen }) {
 
   return (
     <li className="min-w-4/5">
-      <button className="bg-neutral-950 text-md text-stone-50 p-2.5 rounded-xl w-full cursor-pointer text-left border-0 mb-3 relative">
+      <button onClick={onQuestionClick} className="bg-neutral-950 text-md text-stone-50 p-2.5 pr-8 rounded-xl w-full cursor-pointer text-left border-0 relative">
         {question}
-        <svg className="absolute top-1/2 right-2 -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" /></svg>
+        <svg className={`absolute top-1/2 right-2 -translate-y-1/2 fill-stone-50 transition-transform ${isOpen ? 'rotate-90' : ''}`} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" /></svg>
       </button>
-      <p className="text-sm p-2.5 rounded-xl w-full cursor-pointer text-left border-2 mb-3">{answer}</p>
+      {isOpen &&
+        (<p className="text-sm p-2.5 rounded-xl w-full cursor-pointer text-left border-2 mt-3">{answer}</p>)}
     </li>
   )
 }
