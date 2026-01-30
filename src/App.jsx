@@ -41,12 +41,12 @@ export default function App() {
   };
 
   return (
-    <main className="p-7 min-w-dvw">
+    <main className="p-7 text-sm sm:text-base md:text-lg min-w-80 w-full max-w-lg sm:max-w-xl md:max-w-2xl">
       <header>
-        <h1 className="text-2xl">Frequently asked questions</h1>
-        <p className="text-sm mb-3 mt-2">Here are some of the frequently asked questions</p>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl">Frequently asked questions</h1>
+        <p className="mb-3 mt-2">Here are some of the frequently asked questions</p>
       </header>
-      <ul className='flex flex-col gap-3'>
+      <ul className='flex flex-col gap-3 w-full'>
         {questions.map((item) => (
           <Accordion
             key={item.id}
@@ -64,13 +64,13 @@ export default function App() {
 function Accordion({ question, answer, onQuestionClick, isOpen }) {
 
   return (
-    <li className="min-w-4/5">
-      <button onClick={onQuestionClick} className="bg-neutral-950 text-md text-stone-50 p-2.5 pr-8 rounded-xl w-full cursor-pointer text-left border-0 relative">
+    <li className="">
+      <button onClick={onQuestionClick} className="bg-neutral-950 text-stone-50 p-2.5 pr-8 rounded-xl w-full cursor-pointer text-left border-0 relative">
         {question}
         <svg className={`absolute top-1/2 right-2 -translate-y-1/2 fill-stone-50 transition-transform ${isOpen ? 'rotate-90' : ''}`} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" /></svg>
       </button>
       {isOpen &&
-        (<p className="text-sm p-2.5 rounded-xl w-full cursor-pointer text-left border-2 mt-3">{answer}</p>)}
+        (<p className="min-w-fit p-2.5 rounded-xl w-full cursor-pointer text-left border-2 mt-3">{answer}</p>)}
     </li>
   )
 }
