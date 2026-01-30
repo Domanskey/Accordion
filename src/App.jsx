@@ -15,7 +15,7 @@ export default function App() {
       answer: 'The plans focus on keeping the existing roadmaps up-to-date with the ever-evolving tech landscape. Future goals include adding more interactive features, such as progress tracking, personalized skill assessments, and expanding the library of hands-on project ideas for various domains.'
     },
     {
-      id: 'what-is-it-built',
+      id: 'how-is-it-built',
       question: 'How is roadmap.sh built?',
       answer: 'It is an open-source project primarily built using modern web technologies like Astro or Next.js and React. The roadmaps themselves are often rendered as interactive SVGs or organized via JSON data to ensure they are both searchable and easy to maintain by the community.'
     },
@@ -67,7 +67,7 @@ function Accordion({ question, answer, onQuestionClick, isOpen }) {
     <li className="">
       <button onClick={onQuestionClick} className="bg-neutral-950 text-stone-50 p-2.5 pr-8 rounded-xl w-full cursor-pointer text-left border-0 relative">
         {question}
-        <svg className={`absolute top-1/2 right-2 -translate-y-1/2 fill-stone-50 transition-transform ${isOpen ? 'rotate-90' : ''}`} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" /></svg>
+        <svg aria-label="arrow symbol" className={`absolute top-1/2 right-2 -translate-y-1/2 fill-stone-50 transition-transform ${isOpen ? 'rotate-90' : ''}`} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" /></svg>
       </button>
       {isOpen &&
         (<p className="min-w-fit p-2.5 rounded-xl w-full cursor-pointer text-left border-2 mt-3">{answer}</p>)}
