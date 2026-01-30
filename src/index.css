@@ -2,7 +2,11 @@
 
 @layer base {
   body {
-    @apply scheme-light-dark bg-stone-50 text-zinc-900 dark:bg-zinc-900 dark:text-stone-50 min-h-dvh flex flex-col items-center;
+    @apply scheme-light-dark bg-stone-50 text-zinc-900 dark:bg-zinc-900 dark:text-stone-50;
+  }
+
+  #root {
+    @apply min-h-screen flex flex-col items-center;
   }
 }
 
